@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "planillas-numerico",
+  "private_key_id": "a91397063a1dcaea2cf8a6420a12e0e9ae0f8e25",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQClvIAv3PtQuQQj\nwQvp+M8pR8KGHM9rpDC0iA8CPpLnKf2Cvzu1ZgVSEajFnicGTZGoo2zyfmGKjlcu\nz9lTNaQmFvl9KleblAzEwm4mPqFbeRcKqJm1BsG71UvjROtQ8m+alJbyx1J1Z17f\nz9fwKXAJE83mrxmnU9J/sCMRqTYYuXo+KfGbePjwATTwHltRVa7PGU+LmEIgfFW4\nVcU+lzHnhNuzXmniz0eKx7/aj9klUXuHNjXQUk0BIydxskkYBnKQPyrnjTWwhoSp\njLP0D9kUAdEPdvdhkZkKyn2meDcP0ff18or9WyIT7JVDbO84KAs9RAS8H8qN8TGA\nilUVIcAfAgMBAAECggEAS3o7DpEeyrZXkkjaOiWbgnsxtY3tUGIn5C+KVkVU9X2D\n/EVG1eeuSJ/OMqFBuHce/KPge9beaRFF1wXFPUXSiZ4w5LWhzDJyVjENpNEk/tl4\nitwZk/2NwRL0Sn4ahHTEKqu8yrfHb7wx0s9+0dqtMRUZ0hKwJingVVJLxkE/Z6Zk\nwlLcF/oIUXddvFm4AnMLsk3qnEy2X6PxfbafRmVFk9YrZti13dhNVwBQp/5hQ1BV\nFCDvUdYgt65K8UGHXEGf0zt6cjBzInWiP4KbIxKTJW4iaJViHF4atkak8bZgEUYB\nkjhwLCSs6rdYwYxJ4xII1FL+gCXXPFt4DeT1VSSigQKBgQDSnxcd/aRNe2QP5V7z\ndCR6K/8YOyLkj+xUgS7U++ZyJ2TJyMYgDY+S0YrbAOsOVdBemL+hABLX7of72Wxc\ndBF5sL0VQeU+/A1ldNrSKf+XfyZ89hGPYULzPm5/ot5XpWSR930iLgDaHlhfXjei\nAT9oWPOd8qg+3yz78HK2hN1OIQKBgQDJccEHgJ16/2pbPHd9cXf3tYenx2F+mgd6\nS+QljTBP0tN7DIsJ8aw71xcNtcgNM7Vlsqll+XVRgzfflgn7ADTj1YNOKFms4WCr\nm4NRibf1e6mh9Vay3dduIL+8jG7ZvZNfKhmlOVPJmlBD4swuqtuz1m/57jE702K/\n69O6RH7GPwKBgQCGmx4PELccvaspbZHNTYCyg8O4HLMkF8cWCql/fK2+bua+/w2A\nFqqXTkvLwz52HunYSw7NOlrQnaVSk5XpUFSKzSVKnJ6CLlvxZ0kh3611iNF0M17t\nn19GTbQY5mHq6czobJ8QZQ4uWA5qhLBRXTLE4XRwkVBtPfxl1zm45Bj7gQKBgAyb\nyB82F6VJM1j+keQSJBYnEJSZ0CpibbFj6qXHDo0QfxgmktVOgR9FuTWseRcKc4Io\nCp5NXOB7PBYMiBdjzeusw4ky0VoWyTw0gaWq3w7IbLesaX7Mj91ew2GD0LRkP0Mn\nmW9UBUCLHhcBrRIGs7Wv6FZWaFJ8SqQEmL4B54V1AoGALWKMtgX2kLAj8M59Ngng\n5zOJpHJgLFQkmIVqKSyEZ0RT2yBN5+ELBwIbin8NTXSwtNesRD+GAVnd62pJQs1p\nw7yLbnZnfYv8iHtxcCio/F7KtKX+ETWwXNmY9pZZ3YWHxqqnoQjDIel7Ws37nR/x\n2Gx3b4VsgSkqBAx0yfr98Ic=\n-----END PRIVATE KEY-----\n",
+  "client_email": "planillas-numerico@planillas-numerico.iam.gserviceaccount.com",
+  "client_id": "103353465416223007818",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/planillas-numerico%40planillas-numerico.iam.gserviceaccount.com"
+}
