@@ -1,44 +1,43 @@
 import math
 import numpy as np
 
-k = np.longdouble(10)
-Lo = np.longdouble(2 * 1e5/102145)
-a = np.longdouble(1)
-m = np.longdouble(1e5/102145)
-g = np.longdouble(0)
 
 
-def funcion(y):
-	return -2*k*y*(1-Lo/(a**2+y**2)**0.5)-m*g
+def wrapper_biseccion(funcion, derivada, a, b, error, valor_raiz, max_iteraciones):
+	return biseccion(funcion, a, b, error, valor_raiz, max_iteraciones)
 
 def calcular_cant_iteraciones(a, b, error):
 	return int(math.log(abs(a-b)/error,2)+1)
 
-def biseccion(funcion, a, b, error):
+def biseccion(funcion, a, b, error, valor_raiz = None, max_iteraciones = 10000):
 
-	lista = [('k','a','b','Fa','Fb',)]
+	tabla = [['k','a','b','Fa','Fb','err','err_rel','cota_err']]
 
 	cant_iteraciones = calcular_cant_iteraciones(a, b, error)
 
-	ai = a
-	bi = b
+	ai = np.longfloat(a)
+	bi = np.longfloat(b)
+	Fai = funcion(ai)
+	Fbi = funcion(bi)
+	err = '-'
+	err_rel = '-'
 	for i in range(cant_iteraciones+1):
-		pi = (ai+bi)/2
-		Fpi = funcion(pi)
-		Fai = funcion(ai)
-		Fbi = funcion(bi)
+		tabla.append([i,ai,bi,Fai,Fbi,err,err_rel,abs(ai-bi)])
 
-		print(Fpi)
-		if(Fpi == 0):
-			lista.append((i,ai,bi,Fai,Fbi,pi,Fpi,(abs(a-b)/2**i)))
-			return lista
+		if tabla[-1][3] == 0 or tabla[-1][7] < error:
+			break
 
-		if( Fpi*Fai < 0):
-			bi = pi
-		elif( Fpi*Fbi < 0):
-			ai = pi
+		p = (ai+bi)/2
+		Fp = funcion(p)
+		if valor_raiz:
+			err = abs(p-valor_raiz)
+			err_rel = err/valor_raiz
+
+		if( Fp*Fai < 0):
+			bi = p
+			Fbi = Fp
 		else:
-			raise ValueError
-		lista.append((i,ai,bi,Fai,Fbi,pi,Fpi,(abs(a-b)/2**i)))
+			ai = p
+			Fai = Fp
 
-	return lista
+	return tabla

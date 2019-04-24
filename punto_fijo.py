@@ -1,31 +1,24 @@
 from Equation import Expression
 import math
 
-num_padron = 102145
 
-k = 10
-Lo = 2 * 100000 / num_padron 
-a = 1
-m = 100000 / num_padron
-g = 0
+def wrapper_punto_fijo(funcion, derivada, semilla, semilla_b, error, valor_raiz, max_iteraciones):
+	return punto_fijo(funcion, semilla, error, max_iteraciones)
 
-def funcion(y):
-	return y + 2*k*y*(1-Lo/(math.sqrt(math.pow(y,2) + math.pow(a,2)))) + m*g
 
-def punto_fijo(funcion_pf,semilla,error):
-	max_iteraciones = 100
-	error_actual = math.inf
 
-	iteracion_anterior = semilla
+def punto_fijo(funcion_pf,semilla,error,max_iteraciones = 10000):
+	err = np.longdouble(math.inf)
+	p = np.longdouble(semilla)
+	Fp = funcion(p)
 
-	cant_iteraciones = 0
+	i = 0 
+	tabla = [['i','p','F(p)','err_rel','cota_err'],[i,p,Fp,'-','-']]
+	while err > error and i < max_iteraciones:
+		i += 1
+		p = Fp
+		Fp = funcion(p)
+		err = abs(p - tabla[-1][1])
+		tabla.append([i,p,Fp,err/p,err])
 
-	while error_actual > error and cant_iteraciones <= max_iteraciones:
-		cant_iteraciones += 1
-
-		iteracion_actual = funcion_pf(iteracion_anterior)
-		error_actual = abs(iteracion_anterior - iteracion_actual)
-		iteracion_anterior = iteracion_actual
-
-	print(cant_iteraciones)
-	return iteracion_anterior
+	return tabla
