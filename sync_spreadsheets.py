@@ -15,7 +15,7 @@ max_iteraciones = 10000
 from funcion import *
 
 def recortar_numero(string):
-	retorno = string[:10]
+	retorno = string[:16]
 	encontro_e = False
 	for caracter in string:
 		if caracter == 'e':
@@ -53,14 +53,20 @@ def main():
 
 	tabla = FUNCIONES[metodo](funcion, derivada, semilla_a, semilla_b, error, valor_raiz, max_iteraciones)
 
+	da_lo_mismo = []
+	pos_valor = 2 if metodo == 'newton_raphson' else 3
+	for k in range(1,len(tabla)):
+		da_lo_mismo.append((k,abs(tabla[k][pos_valor] - tabla[k-1][pos_valor])))
+
+	print(tabla)
 	for fila in tabla:
 		for i in range(len(fila)):
 			if type(fila[i]) == np.longfloat:
 				fila[i] = recortar_numero(str(fila[i]))
 
-	print(tabla)
 	for fila in tabla:
 		sheet.append_row(fila)
+
 	
 
 main()
