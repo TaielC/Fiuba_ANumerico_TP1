@@ -15,7 +15,7 @@ max_iteraciones = 10000
 from funcion import *
 
 def recortar_numero(string):
-	retorno = string[:5]
+	retorno = string[:10]
 	encontro_e = False
 	for caracter in string:
 		if caracter == 'e':

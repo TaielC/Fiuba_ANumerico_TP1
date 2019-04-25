@@ -11,7 +11,7 @@ def calcular_cant_iteraciones(a, b, error):
 
 def biseccion(funcion, a, b, error, valor_raiz = None, max_iteraciones = 10000):
 
-	tabla = [['k','a','b','Fa','Fb','err','err_rel','cota_err']]
+	tabla = [['k','a','b','Fa','Fb','p','err_rel','cota_err','err_absoluto']]
 
 	cant_iteraciones = calcular_cant_iteraciones(a, b, error)
 
@@ -22,12 +22,14 @@ def biseccion(funcion, a, b, error, valor_raiz = None, max_iteraciones = 10000):
 	err = '-'
 	err_rel = '-'
 	for i in range(cant_iteraciones+1):
-		tabla.append([i,ai,bi,Fai,Fbi,err,err_rel,abs(ai-bi)])
 
-		if tabla[-1][3] == 0 or tabla[-1][7] < error:
+		if tabla[-1][3] == 0:
 			break
 
 		p = (ai+bi)/2
+
+		tabla.append([i,ai,bi,Fai,Fbi,p,err_rel,abs(ai-bi),err])
+
 		Fp = funcion(p)
 		if valor_raiz:
 			err = abs(p-valor_raiz)
