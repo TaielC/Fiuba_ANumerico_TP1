@@ -4,7 +4,7 @@ import numpy as np
 NP = 102145 # Padrón utilizado
 
 # Raiz con g = 0 : +-1.6833787452620399
-valor_raiz = 1.6833787452620399
+valor_raiz = np.longdouble(1.6833787452620399)
 error = 0.5e-15
 
 k = np.longdouble(10)

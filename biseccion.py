@@ -4,6 +4,8 @@ import numpy as np
 
 
 def wrapper_biseccion(funcion, derivada, a, b, error, valor_raiz, max_iteraciones):
+	if b == None:
+		raise ValueError('No se dio un valor de b')
 	return biseccion(funcion, a, b, error, valor_raiz, max_iteraciones)
 
 def calcular_cant_iteraciones(a, b, error):

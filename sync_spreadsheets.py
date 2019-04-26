@@ -91,6 +91,41 @@ def grafico_diferencias(semilla_a, semilla_b):
 	plt.savefig('Tabla Comparativa-P1.png')
 	# plt.show()
 
+def encontrar_rango_convergencia_nr(direccion):
+	
+	diverge_con_actual = False
+	busqueda_binaria = False
+	intervalo = np.longfloat(0.01)
+
+	anterior = 0
+	actual = error+1
+	ultima_linea = []
+	while(True):
+		if not busqueda_binaria and diverge_con_actual:
+				actual = valor_raiz+ (intervalo if direccion > 0 else -intervalo)
+		else:
+			actual = (anterior+actual)/2
+
+		ultima_linea = newton_raphson(funcion, derivada, actual, error,500)[-1][:]
+
+		if ultima_linea[4] > error or abs(ultima_linea[1]-valor_raiz) > error:
+			diverge_con_actual = True
+			if not busqueda_binaria:
+				busqueda_binaria = True
+			continue
+		else:
+			if not busqueda_binaria:
+				intervalo *= 2
+			actual = anterior
+			continue
+
+		if actual-anterior < error:
+			break
+
+	if abs(ultima_linea[1]-valor_raiz) < error:
+		return actual,'La convergencia es desde la raiz hasta el valor, llendo en direccion'
+	else:
+		return actual,'Es probable que hubiera otra raíz a donde convergió el Método'
 def main():
 	args = obtener_args()
 	metodo = args.metodo
@@ -100,12 +135,13 @@ def main():
 	if metodo == 'graph_diferencias':
 		grafico_diferencias(semilla_a, semilla_b)
 		return 
-
-	sheet = obtener_sheet(metodo)
+	elif metodo == 'buscar_rango_convergencia':
+		print(encontrar_rango_convergencia_nr(semilla_a))
+		return
 
 	tabla = FUNCIONES[metodo](funcion, derivada, semilla_a, semilla_b, error, valor_raiz, max_iteraciones)
 
-
+	# sheet = obtener_sheet(metodo)
 	# imprimir_tabla_en_sheet(sheet, tabla)
 	
 
