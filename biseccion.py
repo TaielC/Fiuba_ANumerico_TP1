@@ -11,7 +11,7 @@ def calcular_cant_iteraciones(a, b, error):
 
 def biseccion(funcion, a, b, error, valor_raiz = None, max_iteraciones = 10000):
 
-	tabla = [['k','a','b','Fa','Fb','p','err_rel','cota_err','err_absoluto']]
+	tabla = [['k','a','b','F(a)','F(b)','p','err_rel','cota_err','err_absoluto']]
 
 	cant_iteraciones = calcular_cant_iteraciones(a, b, error)
 

@@ -1,7 +1,10 @@
 import argparse
-import gspread 
 import numpy as np 
 import math
+import matplotlib.pylab as plt 
+from scipy.optimize import brentq
+
+import gspread 
 from oauth2client.service_account import ServiceAccountCredentials
 
 from biseccion import *
@@ -29,7 +32,7 @@ def obtener_args():
 	Parsea los argumentos pasados por consola.
 	'''
 	parser = argparse.ArgumentParser()
-	parser.add_argument("metodo") # Opciones: 'biseccion', 'punto_fijo', 'newton_raphson'
+	parser.add_argument("metodo") # Opciones: 'biseccion', 'newton_raphson'. Opición adicional: 'graph_diferencias'
 	parser.add_argument("semilla_a", type = float)
 	parser.add_argument("semilla_b", nargs = '?', const = None, type = float)
 	return parser.parse_args()
@@ -41,24 +44,8 @@ def obtener_sheet(metodo):
 
 	return client.open(metodo).sheet1
 
-FUNCIONES = {'biseccion':wrapper_biseccion, 'punto_fijo':wrapper_punto_fijo, 'newton_raphson':wrapper_newton_raphson}
 
-def main():
-	args = obtener_args()
-	metodo = args.metodo
-	semilla_a = args.semilla_a
-	semilla_b = args.semilla_b
-
-	sheet = obtener_sheet(metodo)
-
-	tabla = FUNCIONES[metodo](funcion, derivada, semilla_a, semilla_b, error, valor_raiz, max_iteraciones)
-
-	da_lo_mismo = []
-	pos_valor = 2 if metodo == 'newton_raphson' else 3
-	for k in range(1,len(tabla)):
-		da_lo_mismo.append((k,abs(tabla[k][pos_valor] - tabla[k-1][pos_valor])))
-
-	print(tabla)
+def imprimir_tabla_en_sheet(sheet, tabla):
 	for fila in tabla:
 		for i in range(len(fila)):
 			if type(fila[i]) == np.longfloat:
@@ -67,6 +54,59 @@ def main():
 	for fila in tabla:
 		sheet.append_row(fila)
 
+def calcular_diferencias(tabla, metodo):
+	diferencias = []
+	pos_valor = 2 if metodo == 'newton_raphson' else 3
+
+	valor_ant = tabla[1][pos_valor]
+	for k in range(2,len(tabla)):
+		valor = tabla[k][pos_valor]
+		if valor == valor_ant:
+			valor = tabla[k][pos_valor+1]
+			print(k,abs(valor-valor_ant),valor,valor_ant)
+
+		diferencias.append(abs(valor-valor_ant))
+		valor_ant = valor
+	return diferencias
+
+FUNCIONES = {'biseccion':wrapper_biseccion, 'newton_raphson':wrapper_newton_raphson}
+
+def grafico_diferencias(semilla_a, semilla_b):
+	tablas = []
+	dif_entre_iteraciones = []
+
+	plt.figure(figsize=(10,7))
+	for func in FUNCIONES:
+		print(func)
+		tablas.append(FUNCIONES[func](funcion, derivada, semilla_a, semilla_b, error, valor_raiz, max_iteraciones))
+		dif_entre_iteraciones.append(calcular_diferencias(tablas[-1],func))
+		plt.plot(np.arange(len(dif_entre_iteraciones[-1])), dif_entre_iteraciones[-1], '.--', lw=1, ms=8, label=func)
+
+	plt.legend(loc='best')
+	plt.yscale('log')
+	plt.xlabel('k')
+	plt.ylabel('delta_k')
+	plt.title('Comparacion Métodos')
+	plt.grid(True)
+	plt.savefig('Tabla Comparativa-P1.png')
+	# plt.show()
+
+def main():
+	args = obtener_args()
+	metodo = args.metodo
+	semilla_a = args.semilla_a
+	semilla_b = args.semilla_b
+
+	if metodo == 'graph_diferencias':
+		grafico_diferencias(semilla_a, semilla_b)
+		return 
+
+	sheet = obtener_sheet(metodo)
+
+	tabla = FUNCIONES[metodo](funcion, derivada, semilla_a, semilla_b, error, valor_raiz, max_iteraciones)
+
+
+	# imprimir_tabla_en_sheet(sheet, tabla)
 	
 
 main()

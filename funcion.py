@@ -16,8 +16,5 @@ g = np.longdouble(0)
 def funcion(y):
 	return -2*k*y*(1-Lo/(math.sqrt(math.pow(y,2) + math.pow(a,2)))) - m*g
 
-def funcion_pf(y):
-	return y + 2*k*y*(1-Lo/(math.sqrt(math.pow(y,2)+ math.pow(a,2)))) + m*g
-
 def derivada(y):
 	return -2*k*(-Lo*(math.pow(a,2))/(math.pow(math.pow(y,2)+math.pow(a,2),1.5))+1)
