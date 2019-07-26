@@ -5,4 +5,4 @@ TP1 de Análisis Numérico.
 ``` pip3 install gspread oauth2client Equation ```
 
 ## Link para editar el informe
-https://www.overleaf.com/8313694882cnpczgphxgbc
+dead
